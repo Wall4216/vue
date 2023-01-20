@@ -1,9 +1,6 @@
 <template>
   <div class="post">
-    <div class="post" v-for="post in posts">
-      <div><strong>Название:</strong>{{ post.title }}</div>
-      <div><strong>Описание:</strong>{{ post.body }}</div>
-    </div>
+
   </div>
 </template>
 
@@ -15,6 +12,7 @@ export default {
       required: true,
     }
   },
+
   name: "PostList"
 }
 </script>
