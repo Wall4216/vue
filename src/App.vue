@@ -1,23 +1,17 @@
 <template>
-  <div>
-    <form style="padding: 20px" @submit.prevent>
-      <h4>Создание поста</h4>
-      <input @input="title=$event.target.value" v-bind:value="title" class="input" type="text" placeholder="Название">
-      <input @input="body=$event.target.value" v-bind:value="body" class="input" type="text" placeholder="Описание">
-      <button class="btn" @click="createPost">Создать</button>
-    </form>
-    <div class="post">
-      <div class="post" v-for="post in posts">
-        <div><strong>Название:</strong>{{ post.title }}</div>
-        <div><strong>Описание:</strong>{{ post.body }}</div>
-      </div>
-    </div>
-
-  </div>
+<div>
+<PostForm></PostForm>
+<PostList v-bind:posts="posts"></PostList>
+</div>
 </template>
 
 <script>
+import PostForm from "@/components/PostForm";
+import PostList from "@/components/PostList";
 export default {
+  components: {
+    PostList, PostForm
+  },
   data() {
     return {
       posts: [
@@ -55,31 +49,7 @@ export default {
   box-sizing: border-box;
 }
 
-.post{
-  padding: 15px;
-  border: 2px black solid;
-  margin-top: 15px;
-}
 
-.input
-{
-  width: 100%;
-  border: 1px solid teal;
-  padding: 10px 15px;
-  margin-top: 15px;
-}
 
-form {
-  display: flex;
-  flex-direction: column;
-}
 
-.btn {
-  align-self: flex-end;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: 1px solid teal;
-}
 </style>
