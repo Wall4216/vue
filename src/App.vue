@@ -1,7 +1,7 @@
 <template>
 <div>
 <PostForm @create="createPost"> </PostForm>
-<PostList v-bind:posts="posts" ></PostList>
+<PostList v-bind:posts="posts" @remove = "removePost"></PostList>
 
 </div>
 </template>
@@ -30,6 +30,10 @@ export default {
     createPost(post)
     {
       this.posts.push(post);
+    },
+    removePost(post)
+    {
+      this.posts = this.posts.filter(p=>p.id !== post.id)
     }
   }
 }
