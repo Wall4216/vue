@@ -1,11 +1,12 @@
 <template>
-<div>
-  <h1 style="margin-left: 20px">Страница с постами</h1>
+<div class="app">
+
+  <h1 style="">Страница с постами</h1>
   <my-button style="margin-left: 20px" @click="showDialog">Создать пост</my-button>
   <my-dialog v-model:show="dialogVisiable"><PostForm @create="createPost"> </PostForm></my-dialog>
 
-<PostList v-bind:posts="posts" @remove = "removePost"></PostList>
-
+<PostList v-bind:posts="posts" v-if="!isPostsLoading" @remove = "removePost"></PostList>
+<div v-else>Идет загрузка</div>
 </div>
 </template>
 
@@ -15,6 +16,7 @@ import PostList from "@/components/PostList";
 import PostItem from "@/components/PostItem";
 import MyDialog from "@/components/UI/MyDialog";
 import MyButton from "@/components/UI/MyButton";
+import axios from "axios"
 export default {
   components: {
     MyButton,
@@ -23,12 +25,9 @@ export default {
   },
   data() {
     return {
-      posts: [
-        {id: 1, title: 'JS', body: 'Описание'},
-        {id: 2, title: 'TS', body: 'Описание'},
-        {id: 3, title: 'PHP', body: 'Описание'},
-      ],
-      dialogVisiable: false
+      posts: [],
+      dialogVisiable: false,
+      isPostsLoading: false,
     }
   },
   name: "App",
@@ -37,7 +36,7 @@ export default {
     createPost(post)
     {
       this.posts.push(post);
-      this.dialogVisiable = false;
+      this.dialogVisiable = true;
     },
     removePost(post)
     {
@@ -46,7 +45,28 @@ export default {
     showDialog()
     {
       this.dialogVisiable = true;
+    },
+    async fetchsPosts()
+    {
+      try {
+        this.isPostsLoading = true;
+        setTimeout( async () => {
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          this.posts = response.data
+          this.isPostsLoading = false;
+        }, 500)
+
+      }
+      catch (e)
+      {
+        alert('Ошибка')
+      } finally {
+
+      }
     }
+  },
+  mounted() {
+    this.fetchsPosts();
   }
 }
 </script>
@@ -56,6 +76,9 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.app {
+  padding: 20px;
 }
 
 
