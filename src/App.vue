@@ -9,9 +9,10 @@
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
+import PostItem from "@/components/PostItem";
 export default {
   components: {
-    PostList, PostForm
+    PostList, PostForm, PostItem
   },
   data() {
     return {
@@ -37,6 +38,7 @@ export default {
 <style>
 * {
   margin: 0;
+
   padding: 0;
   box-sizing: border-box;
 }

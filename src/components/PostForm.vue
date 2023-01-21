@@ -4,7 +4,7 @@
       <h4>Создание поста</h4>
       <input v-model="post.title"   class="input" type="text" placeholder="Название">
       <input v-model="post.body"  class="input" type="text" placeholder="Описание">
-      <button  @click="createPost" class="btn" >Создать</button>
+      <my-button  @click="createPost" class="btn" >Создать</my-button>
     </form>
 
 
@@ -12,7 +12,9 @@
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton";
 export default {
+  components: {MyButton},
   data()
   {
     return {

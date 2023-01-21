@@ -1,11 +1,15 @@
 <template>
-  <div class="post">
-
-  </div>
+  <h3>Список</h3>
+  <post-item
+      :post="post"
+      v-for="post in posts">
+  </post-item>
 </template>
 
 <script>
+import PostItem from "@/components/PostItem";
 export default {
+  components: {PostItem},
   props: {
     posts: {
       type: Array,
@@ -18,9 +22,5 @@ export default {
 </script>
 
 <style scoped>
-.post{
-  padding: 15px;
-  border: 2px black solid;
-  margin-top: 15px;
-}
+
 </style>
