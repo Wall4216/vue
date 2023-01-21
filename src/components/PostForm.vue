@@ -2,8 +2,8 @@
   <div>
     <form style="padding: 20px" @submit.prevent>
       <h4>Создание поста</h4>
-      <input v-model="post.title"   class="input" type="text" placeholder="Название">
-      <input v-model="post.body"  class="input" type="text" placeholder="Описание">
+      <my-input v-model="post.title"   type="text" placeholder="Название"></my-input>
+      <my-input v-model="post.body"   type="text" placeholder="Описание"></my-input>
       <my-button  @click="createPost" class="btn" >Создать</my-button>
     </form>
 
@@ -13,8 +13,9 @@
 
 <script>
 import MyButton from "@/components/UI/MyButton";
+import MyInput from "@/components/UI/MyInput";
 export default {
-  components: {MyButton},
+  components: {MyInput, MyButton},
   data()
   {
     return {
@@ -40,13 +41,6 @@ export default {
 </script>
 
 <style scoped>
-.input
-{
-  width: 100%;
-  border: 1px solid teal;
-  padding: 10px 15px;
-  margin-top: 15px;
-}
 
 form {
   display: flex;
