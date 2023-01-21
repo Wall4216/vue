@@ -1,6 +1,9 @@
 <template>
 <div>
-<PostForm @create="createPost"> </PostForm>
+  <h1 style="margin-left: 20px">Страница с постами</h1>
+  <my-button style="margin-left: 20px" @click="showDialog">Создать пост</my-button>
+  <my-dialog v-model:show="dialogVisiable"><PostForm @create="createPost"> </PostForm></my-dialog>
+
 <PostList v-bind:posts="posts" @remove = "removePost"></PostList>
 
 </div>
@@ -10,8 +13,12 @@
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
 import PostItem from "@/components/PostItem";
+import MyDialog from "@/components/UI/MyDialog";
+import MyButton from "@/components/UI/MyButton";
 export default {
   components: {
+    MyButton,
+    MyDialog,
     PostList, PostForm, PostItem
   },
   data() {
@@ -21,7 +28,7 @@ export default {
         {id: 2, title: 'TS', body: 'Описание'},
         {id: 3, title: 'PHP', body: 'Описание'},
       ],
-
+      dialogVisiable: false
     }
   },
   name: "App",
@@ -30,10 +37,15 @@ export default {
     createPost(post)
     {
       this.posts.push(post);
+      this.dialogVisiable = false;
     },
     removePost(post)
     {
       this.posts = this.posts.filter(p=>p.id !== post.id)
+    },
+    showDialog()
+    {
+      this.dialogVisiable = true;
     }
   }
 }
@@ -42,7 +54,6 @@ export default {
 <style>
 * {
   margin: 0;
-
   padding: 0;
   box-sizing: border-box;
 }

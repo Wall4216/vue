@@ -1,6 +1,6 @@
 <template>
   <div v-if="posts.length > 0">
-  <h3>Список</h3>
+  <h3 style="margin-left: 20px">Список</h3>
   <post-item
       :post="post"
       v-for="post in posts" :key="post.id" @remove="$emit('remove', post)">
