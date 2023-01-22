@@ -27,6 +27,7 @@
     <div v-else>Идет загрузка...</div>
   </div>
 </template>
+
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
