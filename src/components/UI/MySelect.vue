@@ -1,10 +1,10 @@
 <template>
-  <select v-model="modelValue" @change="changeOption">
+  <select @change="changeOption">
     <option disabled value="">Выберите из списка</option>
     <option
-        v-for="option in options"
-        :key="option.value"
-        :value="option.value"
+      v-for="option in options"
+      :key="option.value"
+      :value="option.value"
     >
       {{ option.name }}
     </option>
@@ -32,4 +32,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>
