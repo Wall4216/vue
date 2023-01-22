@@ -1,48 +1,53 @@
 <template>
-  <div v-if="posts.length > 0">
-  <h3 style="margin-top: 9px">Список</h3>
-  <transition-group name="user-list">
-    <post-item
-        :post="post"
-        v-for="post in posts" :key="post.id" @remove="$emit('remove', post)">
-    </post-item>
-  </transition-group>
-  </div>
-  <h2 v-else style="color: green">
-    Список постов пуст
-  </h2>
+  <form @submit.prevent>
+    <h4>Создание поста</h4>
+    <my-input
+        v-focus
+        v-model="post.title"
+        type="text"
+        placeholder="Название"
+    />
+    <my-input
+        v-model="post.body"
+        type="text"
+        placeholder="Описание"
+    />
+    <my-button
+        style="align-self: flex-end; margin-top: 15px"
+        @click="createPost"
+    >
+      Создать
+    </my-button>
+  </form>
 </template>
 
 <script>
-import PostItem from "@/components/PostItem";
 export default {
-  components: {PostItem},
-  props: {
-    posts: {
-      type: Array,
-      required: true,
+  data() {
+    return {
+      post: {
+        title: '',
+        body: ''
+      }
     }
   },
-
-  name: "PostList"
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit('create', this.post)
+      this.post = {
+        title: '',
+        body: ''
+      }
+    }
+  },
 }
 </script>
 
 <style scoped>
-.user-list-item {
-  display: inline-block;
-  margin-right: 10px;
+form {
+  display: flex;
+  flex-direction: column;
 }
-.user-list-enter-active,
-.user-list-leave-active {
-  transition: all 0.4s ease;
-}
-.user-list-enter-from,
-.user-list-leave-to {
-  opacity: 0;
-  transform: translateX(130px);
-}
-.user-list-move {
-  transition: transform 0.4s ease;
-}
+
 </style>
